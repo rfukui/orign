@@ -1,0 +1,1 @@
+from .insurance_sugestion import insurance_sugestion

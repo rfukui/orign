@@ -1,0 +1,27 @@
+version: '3.4'
+
+services:
+  dev:
+    image: python:3.8.3
+    container_name: orgin_dev
+    command: sh -c "pip install -r requirements.txt && flask run --host=0.0.0.0"
+    working_dir: /app
+    environment:
+      - FLASK_ENV=development
+      - FLASK_APP=main.py
+
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./:/app:cached
+
+  test:
+    image: python:3.8.3
+    container_name: orgin_test
+    command: sh -c "pip install -r requirements.txt && python tests.py"
+    working_dir: /app
+    environment:
+      - FLASK_ENV=test
+
+    volumes:
+      - ./:/app:cached
